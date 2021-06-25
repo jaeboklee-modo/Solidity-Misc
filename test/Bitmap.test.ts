@@ -1,5 +1,4 @@
 import { Bitmap, Bitmap__factory } from "../typechain";
-import { expect } from "chai";
 import { ethers, waffle } from "hardhat";
 
 describe("Bitmap", () => {

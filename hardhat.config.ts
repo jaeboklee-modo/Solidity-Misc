@@ -1,10 +1,7 @@
 import "dotenv/config";
-import "@nomiclabs/hardhat-waffle";
+import "@nomiclabs/hardhat-etherscan";
 import "hardhat-typechain";
-import "@typechain/ethers-v5";
-// import "solidity-coverage"
-// Gas-reporter's parser dependency makes Warning:
-// Accessing non-existent property 'INVALID_ALT_NUMBER' of module exports inside circular dependency
+import "./tasks/mining.ts";
 
 import { HardhatUserConfig } from "hardhat/types";
 
@@ -23,12 +20,36 @@ const config: HardhatUserConfig = {
     },
   },
   networks: {
-    hardhat: {},
+    mainnet: {
+      url: `https://mainnet.infura.io/v3/${process.env.INFURA_API_KEY}`,
+      accounts: [process.env.ADMIN || ""],
+      chainId: 1,
+    },
+    kovan: {
+      url: `https://kovan.infura.io/v3/${process.env.INFURA_API_KEY}`,
+      accounts: {
+        mnemonic: process.env.TEST_MNEMONIC,
+      },
+      chainId: 42,
+    },
+    ganache: {
+      url: "http://0.0.0.0:8545",
+    },
+  },
+  etherscan: {
+    apiKey: process.env.ETHERSCAN_API_KEY,
   },
   paths: {
     sources: "./contracts",
     tests: "./test",
     cache: "./cache",
+  },
+  mocha: {
+    reporter: "eth-gas-reporter",
+    reporterOptions: {
+      currency: "KRW",
+      showTimeSpent: true,
+    },
   },
 };
 

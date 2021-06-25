@@ -17,5 +17,7 @@ const parser = (informationDigits: InformationDigit, wholeNumber: string) => {
   const result = <Information>{};
 
   const assetBondMask = assetBondPosition(informationDigits, wholeNumber);
+
+  const nonceMask = assetBondMask.nonce;
   result.nonce = informationDigits.nonce;
 };

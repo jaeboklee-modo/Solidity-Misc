@@ -37,17 +37,17 @@ contract Bitmap {
     uint256 constant COLLATERAL_CATEGORY_START = 166;
     uint256 constant PRODUCT_NUMBER_START = 176;
 
-    function getNonce(uint256 tokenId) external view returns (uint256) {
+    function getNonce(uint256 tokenId) external pure returns (uint256) {
         return tokenId & ~NONCE;
     }
 
-    function getCountryCode(uint256 tokenId) external view returns (uint256) {
+    function getCountryCode(uint256 tokenId) external pure returns (uint256) {
         return (tokenId & ~COUNTRY_CODE) >> COUNTRY_CODE_START;
     }
 
     function getCollateralServiceProviderIdentification(uint256 tokenId)
         external
-        view
+        pure
         returns (uint256)
     {
         return
@@ -57,7 +57,7 @@ contract Bitmap {
 
     function getCollateralLatitude(uint256 tokenId)
         external
-        view
+        pure
         returns (uint256)
     {
         return (tokenId & ~COLLATERAL_LATITUDE) >> COLLATERAL_LATITUDE_START;
@@ -65,7 +65,7 @@ contract Bitmap {
 
     function getCollateralLatitudeSigns(uint256 tokenId)
         external
-        view
+        pure
         returns (uint256)
     {
         return
@@ -75,7 +75,7 @@ contract Bitmap {
 
     function getCollateralLongitude(uint256 tokenId)
         external
-        view
+        pure
         returns (uint256)
     {
         return (tokenId & ~COLLATERAL_LONGITUDE) >> COLLATERAL_LONGITUDE_START;
@@ -83,7 +83,7 @@ contract Bitmap {
 
     function getCollateralLongitudeSigns(uint256 tokenId)
         external
-        view
+        pure
         returns (uint256)
     {
         return
@@ -93,7 +93,7 @@ contract Bitmap {
 
     function getCollateralDetails(uint256 tokenId)
         external
-        view
+        pure
         returns (uint256)
     {
         return (tokenId & ~COLLATERAL_DETAILS) >> COLLATERAL_DETAILS_START;
@@ -101,13 +101,13 @@ contract Bitmap {
 
     function getCollateralCategory(uint256 tokenId)
         external
-        view
+        pure
         returns (uint256)
     {
         return (tokenId & ~COLLATERAL_CATEGORY) >> COLLATERAL_CATEGORY_START;
     }
 
-    function getProductNumber(uint256 tokenId) external view returns (uint256) {
+    function getProductNumber(uint256 tokenId) external pure returns (uint256) {
         return (tokenId & ~PRODUCT_NUMBER) >> PRODUCT_NUMBER_START;
     }
 }
