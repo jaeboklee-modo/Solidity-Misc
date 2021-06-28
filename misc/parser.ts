@@ -1,23 +1,15 @@
-import { ethers } from "ethers";
-import {
-  assetBondPosition,
-  Information,
-  InformationDigit,
-  informationDigits,
-  wholeNumber,
-} from "./bitmapPosition";
+import { Information, InformationDigit, wholeNumber } from './types';
+import informationDigits from './informationDigit.json';
 
-informationDigits;
+export const tokenIdParser = (tokenId: string) => {
+  const parsedTokenId = <Information>{};
+  let end = wholeNumber.length;
+  (Object.keys(informationDigits) as (keyof InformationDigit)[]).forEach((key) => {
+    let start = end - informationDigits[key] + 1;
+    start = start != end ? start : start - 1;
+    parsedTokenId[key] = parseInt(tokenId.slice(start, end), 2);
+    end -= informationDigits[key];
+  });
 
-assetBondPosition;
-
-wholeNumber;
-
-const parser = (informationDigits: InformationDigit, wholeNumber: string) => {
-  const result = <Information>{};
-
-  const assetBondMask = assetBondPosition(informationDigits, wholeNumber);
-
-  const nonceMask = assetBondMask.nonce;
-  result.nonce = informationDigits.nonce;
+  return parsedTokenId;
 };
